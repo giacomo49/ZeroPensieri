@@ -1,0 +1,64 @@
+{
+  "name": "zeropensieri",
+  "productName": "ZeroPensieri",
+  "version": "0.1.0",
+  "description": "Archivio semplice per i documenti di casa: carica, ritrova e ricorda cosa c'è da pagare.",
+  "author": "ZeroPensieri",
+  "private": true,
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/unit/",
+    "fetch-llama": "node scripts/fetch-llama.mjs",
+    "dist:win": "node scripts/fetch-llama.mjs win32 x64 && electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "node scripts/fetch-llama.mjs darwin arm64 && electron-builder --mac dmg --arm64 --publish never",
+    "test:e2e": "node test/e2e/smoke.mjs",
+    "pack:mac": "node scripts/fetch-llama.mjs && electron-builder --mac dir --publish never"
+  },
+  "dependencies": {
+    "dompurify": "^3.4.18",
+    "mammoth": "^1.13.0",
+    "marked": "^18.2.0",
+    "pdfjs-dist": "^6.5.438"
+  },
+  "devDependencies": {
+    "electron": "^45.3.2",
+    "electron-builder": "^26.18.0",
+    "playwright-core": "^1.65.1"
+  },
+  "build": {
+    "appId": "it.zeropensieri.app",
+    "productName": "ZeroPensieri",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "vendor/llama/${os}-${arch}",
+        "to": "llama"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "ZeroPensieri",
+      "runAfterFinish": true,
+      "artifactName": "ZeroPensieri-Setup-${version}.${ext}"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.productivity",
+      "identity": null
+    }
+  }
+}
