@@ -3,7 +3,7 @@
 Un programma semplice per tenere in ordine i documenti di casa: multe, bollette, assicurazioni, visite mediche, atti.
 Pensato per chi non ha confidenza con il computer: tre pulsanti grandi, scritte grandi, niente di superfluo.
 
-![La schermata iniziale di ZeroPensieri: tre grandi pulsanti colorati, Carica documento, I tuoi documenti e Cose da pagare](docs/home.png)
+![La schermata iniziale di ZeroPensieri: tre grandi pulsanti colorati, Carica documento, I tuoi documenti e Cose da pagare](docs/schermata-home.png)
 
 - **Carica documento** – aggiungi una foto, un PDF o un file Word, scegli la cartella, dì se è da pagare.
 - **I tuoi documenti** – sfoglia la cartella collegata con le anteprime.
