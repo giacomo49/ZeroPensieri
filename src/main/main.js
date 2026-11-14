@@ -61,10 +61,17 @@ function requireArchive() {
 }
 
 function appState() {
+  let isEmpty = false;
+  try {
+    const top = archive?.list('');
+    isEmpty = !!top && top.folders.length === 0 && top.files.length === 0;
+  } catch {
+    archive = null; // la cartella collegata non c'è più (spostata, chiavetta staccata...): si richiede
+  }
   return {
     root: archive ? archive.root : null,
     rootName: archive ? path.basename(archive.root) : null,
-    isEmpty: archive ? archive.list('').folders.length === 0 && archive.list('').files.length === 0 : false,
+    isEmpty,
     toPayCount: archive ? archive.countToPay() : 0,
     starterFolders: STARTER_FOLDERS,
     currentYear: String(new Date().getFullYear()),
